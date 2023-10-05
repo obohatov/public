@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="mt-3">
-    <h1>Add Task</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+  <h1>Add Task</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea id="content" class="form-control" name="content">{{ form.content.value }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="deadline">Deadline</label>
+      <input type="datetime-local" id="deadline" class="form-control" name="deadline" value="{{ form.deadline.value }}">
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="is_done" name="is_done" {% if form.is_done.value %}checked{% endif %}>
+      <label class="form-check-label" for="is_done">Is done</label>
+    </div>
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <select multiple class="form-control" id="tags" name="tags">
+        {% for tag in tags %}
+          <option value="{{ tag.pk }}">{{ tag.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 {% endblock %}
+

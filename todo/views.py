@@ -20,8 +20,8 @@ def add_task(request):
         task = Task.objects.create(content=content, deadline=deadline)
         task.tags.set(tags)
         return redirect("/")
-    return render(request, "todo/add_task.html")
-
+    tags = Tag.objects.all()
+    return render(request, "todo/add_task.html", {"tags": tags})
 
 def update_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
