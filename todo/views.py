@@ -4,12 +4,12 @@ from todo.models import Task, Tag
 
 def home(request):
     tasks = Task.objects.all().order_by("-is_done", "-created_at")
-    return render(request, "home.html", {"tasks": tasks})
+    return render(request, "todo/home.html", {"tasks": tasks})
 
 
 def tag_list(request):
     tags = Tag.objects.all()
-    return render(request, "tag_list.html", {"tags": tags})
+    return render(request, "todo/tag_list.html", {"tags": tags})
 
 
 def add_task(request):
@@ -20,7 +20,7 @@ def add_task(request):
         task = Task.objects.create(content=content, deadline=deadline)
         task.tags.set(tags)
         return redirect("/")
-    return render(request, "add_task.html")
+    return render(request, "todo/add_task.html")
 
 
 def update_task(request, task_id):
@@ -34,7 +34,7 @@ def update_task(request, task_id):
         task.tags.set(tags)
         task.save()
         return redirect("/")
-    return render(request, "update_task.html", {"task": task})
+    return render(request, "todo/update_task.html", {"task": task})
 
 
 def delete_task(request, task_id):
@@ -62,7 +62,7 @@ def add_tag(request):
         name = request.POST.get("name")
         Tag.objects.create(name=name)
         return redirect("/tags/")
-    return render(request, "add_tag.html")
+    return render(request, "todo/add_tag.html")
 
 
 def update_tag(request, tag_id):
@@ -72,7 +72,7 @@ def update_tag(request, tag_id):
         tag.name = name
         tag.save()
         return redirect("/tags/")
-    return render(request, "update_tag.html", {"tag": tag})
+    return render(request, "todo/update_tag.html", {"tag": tag})
 
 
 def delete_tag(request, tag_id):
