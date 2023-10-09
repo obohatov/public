@@ -1,0 +1,66 @@
+from django.urls import path
+from todo.views import (
+    HomeView,
+    TagListView,
+    AddTaskView,
+    UpdateTaskView,
+    DeleteTaskView,
+    CompleteTaskView,
+    UndoTaskView,
+    AddTagView,
+    UpdateTagView,
+    DeleteTagView
+)
+
+urlpatterns = [
+    path(
+        "",
+        HomeView.as_view(),
+        name="home"
+    ),
+    path(
+        "tags/",
+        TagListView.as_view(),
+        name="tag_list"
+    ),
+    path(
+        "add_task/",
+        AddTaskView.as_view(),
+        name="add_task"
+    ),
+    path(
+        "add_tag/",
+        AddTagView.as_view(),
+        name="add_tag"
+    ),
+    path(
+        "update_task/<int:task_id>/",
+        UpdateTaskView.as_view(),
+        name="update_task"
+    ),
+    path(
+        "delete_task/<int:task_id>/",
+        DeleteTaskView.as_view(),
+        name="delete_task"
+    ),
+    path(
+        "complete_task/<int:task_id>/",
+        CompleteTaskView.as_view(),
+        name="complete_task"
+    ),
+    path(
+        "undo_task/<int:task_id>/",
+        UndoTaskView.as_view(),
+        name="undo_task"
+    ),
+    path(
+        "update_tag/<int:tag_id>/",
+        UpdateTagView.as_view(),
+        name="update_tag"
+    ),
+    path(
+        "delete_tag/<int:tag_id>/",
+        DeleteTagView.as_view(),
+        name="delete_tag"
+    ),
+]
